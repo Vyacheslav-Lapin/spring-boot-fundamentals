@@ -9,27 +9,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vlapin.experiments.springbootfundamentals.model.jsonplaceholder.Comment;
-import ru.vlapin.experiments.springbootfundamentals.service.jsonplaceholder.CommentService;
+import ru.vlapin.experiments.springbootfundamentals.dao.jsonplaceholder.CommentDao;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/comments")
 public class CommentController {
 
-  CommentService commentService;
+  CommentDao commentDao;
 
   @NotNull
   @GetMapping
   @Contract(pure = true)
   public List<Comment> comments() {
-    return commentService.all();
+    return commentDao.all();
   }
 
   @NotNull
   @GetMapping("{id}")
   @Contract(pure = true)
   public Comment comment(@PathVariable @NotNull Long id) {
-    return commentService.findById(id);
+    return commentDao.findById(id);
   }
 
 //  @NotNull

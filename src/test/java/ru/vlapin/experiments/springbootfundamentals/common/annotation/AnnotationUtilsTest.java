@@ -1,8 +1,8 @@
-package com.epam.courses.java.fundamentals.oop.annotations;
+package ru.vlapin.experiments.springbootfundamentals.common.annotation;
 
-import static com.epam.courses.java.fundamentals.oop.annotations.AnnotationUtils.getDeepAnnotation;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static org.assertj.core.api.Assertions.assertThat;
+import static ru.vlapin.experiments.springbootfundamentals.common.annotation.AnnotationUtils.getDeepAnnotation;
 
 import java.lang.annotation.Retention;
 import lombok.SneakyThrows;

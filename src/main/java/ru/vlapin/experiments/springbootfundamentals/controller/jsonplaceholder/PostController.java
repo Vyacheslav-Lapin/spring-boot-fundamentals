@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vlapin.experiments.springbootfundamentals.model.jsonplaceholder.Post;
-import ru.vlapin.experiments.springbootfundamentals.service.jsonplaceholder.PostService;
+import ru.vlapin.experiments.springbootfundamentals.dao.jsonplaceholder.PostDao;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/posts")
 public class PostController {
 
-  PostService postService;
+  PostDao postDao;
 
   @NotNull
   @GetMapping
   @Contract(pure = true)
   public List<Post> get() {
-    return postService.all();
+    return postDao.all();
   }
 
   @NotNull
   @GetMapping("{id}")
   public Post get(@PathVariable @NotNull Long id) {
-    return postService.findById(id);
+    return postDao.findById(id);
   }
 
 //  @NotNull

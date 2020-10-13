@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vlapin.experiments.springbootfundamentals.model.jsonplaceholder.Todo;
-import ru.vlapin.experiments.springbootfundamentals.service.jsonplaceholder.TodoService;
+import ru.vlapin.experiments.springbootfundamentals.dao.jsonplaceholder.TodoDao;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/todos")
 public class TodoController {
 
-  TodoService todoService;
+  TodoDao todoDao;
 
   @NotNull
   @GetMapping
   public List<Todo> todos() {
-    return todoService.all();
+    return todoDao.all();
   }
 
   @GetMapping("{id}")
   public Todo todo(@PathVariable @NotNull Long id) {
-    return todoService.findById(id);
+    return todoDao.findById(id);
   }
 }

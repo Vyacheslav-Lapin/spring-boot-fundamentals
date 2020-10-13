@@ -12,5 +12,5 @@ import java.lang.annotation.Target;
  */
 @Retention(RUNTIME)
 @Target({ANNOTATION_TYPE, METHOD})
-public @interface PostProxy {
+public @interface AfterProxy {
 }

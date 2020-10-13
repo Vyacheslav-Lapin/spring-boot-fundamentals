@@ -1,4 +1,4 @@
-package ru.vlapin.experiments.springbootfundamentals.service.jsonplaceholder;
+package ru.vlapin.experiments.springbootfundamentals.dao.jsonplaceholder;
 
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -10,7 +10,7 @@ import ru.vlapin.experiments.springbootfundamentals.model.jsonplaceholder.User;
     name = "UserJsonPlaceHolder",
     url = "https://jsonplaceholder.typicode.com",
     path = "users")
-public interface UserService {
+public interface UserDao {
 
   @GetMapping
   List<User> all();

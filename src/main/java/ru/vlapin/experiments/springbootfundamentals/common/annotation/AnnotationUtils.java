@@ -1,4 +1,4 @@
-package com.epam.courses.java.fundamentals.oop.annotations;
+package ru.vlapin.experiments.springbootfundamentals.common.annotation;
 
 import static io.vavr.API.$;
 import static io.vavr.API.Case;
@@ -16,6 +16,7 @@ import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
+import lombok.val;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -104,7 +105,9 @@ public interface AnnotationUtils {
   @Contract(pure = true)
   static @NotNull <T extends Annotation> T wrapAnnotationWithAliasForFunctionality(@NotNull T annotation) {
 
-    Class<? extends Annotation> annotationType = annotation.annotationType();
+    val annotationType = annotation.annotationType();
+    val getMethod = CheckedFunction1.<String, Method>narrow(annotationType::getMethod).unchecked();
+    val invoke = CheckedFunction1.<Method, Object>narrow(method1 -> method1.invoke(annotation)).unchecked();
 
     //noinspection unchecked
     return (T) Proxy.newProxyInstance(
@@ -112,18 +115,16 @@ public interface AnnotationUtils {
         new Class[]{annotationType},
         (__, method, args) -> {
 
-          Method realMethod = annotationType
-                                  .getMethod(method.getName(), method.getParameterTypes());
-
-          Object result = realMethod.invoke(annotation, args);
+          val realMethod = annotationType.getMethod(method.getName(), method.getParameterTypes());
+          val result = realMethod.invoke(annotation, args);
 
           return !method.getDeclaringClass().equals(annotationType)
                      || !isPseudoNullValue(method.getReturnType(), result)
                      ? result
                      : Optional.ofNullable(realMethod.getDeclaredAnnotation(AliasFor.class))
                            .map(AliasFor::value)
-                           .map(CheckedFunction1.<String, Method>narrow(annotationType::getMethod).unchecked())
-                           .map(CheckedFunction1.<Method, Object>narrow(method1 -> method1.invoke(annotation)).unchecked())
+                           .map(getMethod)
+                           .map(invoke)
                            .orElse(result);
         });
   }

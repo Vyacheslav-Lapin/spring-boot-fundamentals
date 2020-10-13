@@ -1,4 +1,4 @@
-package ru.vlapin.experiments.springbootfundamentals.service.jsonplaceholder;
+package ru.vlapin.experiments.springbootfundamentals.dao.jsonplaceholder;
 
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +12,7 @@ import ru.vlapin.experiments.springbootfundamentals.model.jsonplaceholder.Post;
     name = "PostJsonPlaceHolder",
     url = "https://jsonplaceholder.typicode.com",
     path = "posts")
-public interface PostService {
+public interface PostDao {
 
   @GetMapping
   List<Post> all();

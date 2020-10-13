@@ -1,5 +1,6 @@
 package ru.vlapin.experiments.springbootfundamentals.config;
 
+import java.net.HttpURLConnection;
 import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
@@ -17,7 +18,7 @@ public class DataJpaIniter implements ApplicationRunner {
   @Override
   public void run(ApplicationArguments args) throws Exception {
     Stream.of("Мурзик, Барсик, Матроскин".split(", "))
-      .map(Cat::new)
-      .forEach(catRepository::save);
+        .map(Cat::new)
+        .forEach(catRepository::save);
   }
 }

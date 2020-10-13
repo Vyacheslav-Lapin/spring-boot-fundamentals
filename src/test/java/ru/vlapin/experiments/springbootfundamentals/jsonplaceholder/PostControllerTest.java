@@ -11,20 +11,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.vlapin.experiments.springbootfundamentals.model.jsonplaceholder.Post;
-import ru.vlapin.experiments.springbootfundamentals.service.jsonplaceholder.PostService;
+import ru.vlapin.experiments.springbootfundamentals.dao.jsonplaceholder.PostDao;
 
 @SpringBootTest
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 class PostControllerTest {
 
   long id = 57L;
-  PostService postService;
+  PostDao postDao;
 
   @Test
   @SneakyThrows
   @DisplayName("Get method works correctly")
   void get() {
-    assertThat(postService.all())
+    assertThat(postDao.all())
         .isNotNull()
         .isNotEmpty()
         .hasSize(100);
@@ -42,7 +42,7 @@ class PostControllerTest {
         qui ullam et est
         et cum voluptas voluptatum repellat est"""), "body is equals");
 
-    assertThat(postService.findById(id))
+    assertThat(postDao.findById(id))
         .isNotNull()
         .satisfies(idCondition)
         .satisfies(bodyCondition);

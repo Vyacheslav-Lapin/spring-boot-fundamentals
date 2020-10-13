@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 
 @Configuration
-@EnableHypermediaSupport(type = HAL)
-@EnableFeignClients("ru.vlapin.experiments.springbootfundamentals.service")
+//@EnableHypermediaSupport(type = HAL)
+//@EnableFeignClients("ru.vlapin.experiments.springbootfundamentals.dao")
 public class Feign {
 }
