@@ -1,0 +1,11 @@
+language: java
+jdk: openjdk14
+# install: true
+cache:
+  directories:
+    - /.m2
+script:
+  - mvn -N io.takari:maven:wrapper -Dmaven=
+  - ./mvnw verify
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
